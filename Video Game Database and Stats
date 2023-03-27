@@ -1,0 +1,29 @@
+CREATE TABLE video_games (id INTEGER PRIMARY KEY, name TEXT, genre TEXT, price INTEGER, rating INTEGER); 
+INSERT INTO video_games VALUES (1, "SSX Tricky", "E", 50, 100);
+INSERT INTO video_games VALUES (2, "Def JAM: Fight for NY", "E", 45, 100);
+INSERT INTO video_games VALUES (3, "Rocket League", "E", 0, 87);
+INSERT INTO video_games VALUES (4, "GTA", "M", 45, 90); 
+INSERT INTO video_games VALUES (5, "PUBG", "M", 20, 95);
+INSERT INTO video_games VALUES (6, "BLoody Roar", "M", 40, 100);
+INSERT INTO video_games VALUES (7, "Apex Legends", "T", 0, 98);
+INSERT INTO video_games VALUES (8, "Fortnite", "E", 0, 87);
+INSERT INTO video_games VALUES (9, "NFS", "T", 30, 98);
+INSERT INTO video_games VALUES (10, "Zelda", "E", 35, 90);
+INSERT INTO video_games VALUES (11, "Super Smash Bros", "E", 50, 99);
+INSERT INTO video_games VALUES (12, "Pokemon", "E", 30, 97);
+INSERT INTO video_games VALUES (13, "Kirby", "E", 15, 80);
+INSERT INTO video_games VALUES (14, "Titanfall", "T", 34, 96);
+INSERT INTO video_games VALUES (15, "Halo", "M", 60, 100);
+
+
+--display the database ordered by price
+SELECT * FROM video_games ORDER BY price;
+
+
+--what are all games where rating is greater than 90
+SELECT * FROM video_games WHERE rating > 90;
+
+
+--Filter most minimum prices of the video game list
+SELECT MIN(price) FROM video_games GROUP BY price
+
