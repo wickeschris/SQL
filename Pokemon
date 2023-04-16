@@ -828,17 +828,24 @@ HAVING hit_points > 150;
 
 SELECT name, SUM(attack) AS hit_points,
 CASE 
- WHEN SUM(attack) > 150 THEN 'very strong'
- WHEN SUM(attack) = 150 THEN 'kinda strong'
- ELSE 'kinda strong'
+ WHEN SUM(attack) > 150 THEN 'strong'
+ WHEN SUM(attack) = 150 THEN 'okay'
+ ELSE 'weak'
 END as 'power_level'
 FROM pokemon
-GROUP BY name
-HAVING power_level > 150;
--- excuting this query above creates a case where when attack points are above 150 then the pokemon is labeled as very strong, equal to 150 then the pokemon has a kinda strong power level and everyhting else is considered a weak power level. 
+GROUP BY name;
+-- excuting this query above creates a case where when attack points are above 150 then the pokemon is labeled as strong, equal to 150 then the pokemon has an okay power level and everyhting else is considered a weak power level. 
 
 SELECT name 
 FROM pokemon
 WHERE type_1 = 'fire'
 AND type_2 = 'flying';
---this query above filters out the names of pokemon with a fire and flying type 
+--this query above filters out the names of pokemon with a fire and flying type
+
+SELECT MAX(type_1)
+FROM pokemon;
+--this query gives you the most listed type of pokemon
+
+SELECT MIN(type_1) 
+FROM pokemon;
+--this query gives you the pokemon type that is the least listed
