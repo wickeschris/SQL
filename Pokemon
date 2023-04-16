@@ -813,3 +813,32 @@ INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (720,'HoopaHoopa Confined','Psychic','Ghost',600,80,110,60,150,130,70,6,'True');
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (720,'HoopaHoopa Unbound','Psychic','Dark',680,80,160,60,170,130,80,6,'True');
 INSERT INTO pokemon(Number,Name,Type_1,Type_2,Total,HP,Attack,Defense,Sp_Atk,Sp_Def,Speed,Generation,Legendary) VALUES (721,'Volcanion','Fire','Water',600,80,110,120,130,90,70,6,'True');
+
+SELECT name, attack
+FROM pokemon 
+order by attack DESC;
+-- excuting this query above filters the name of the pokemon and its attack points in descending order, showing the strongest first and the weakest last. 
+
+SELECT name,
+SUM(attack) AS hit_points
+FROM pokemon
+GROUP BY name
+HAVING hit_points > 150;
+-- excuting this query above filters the name of all pokemon  with over 150 attack points. Creating another column (from the aggregate the "SUM( attack)") named as hit_points.
+
+SELECT name, SUM(attack) AS hit_points,
+CASE 
+ WHEN SUM(attack) > 150 THEN 'very strong'
+ WHEN SUM(attack) = 150 THEN 'kinda strong'
+ ELSE 'kinda strong'
+END as 'power_level'
+FROM pokemon
+GROUP BY name
+HAVING power_level > 150;
+-- excuting this query above creates a case where when attack points are above 150 then the pokemon is labeled as very strong, equal to 150 then the pokemon has a kinda strong power level and everyhting else is considered a weak power level. 
+
+SELECT name 
+FROM pokemon
+WHERE type_1 = 'fire'
+AND type_2 = 'flying';
+--this query above filters out the names of pokemon with a fire and flying type 
