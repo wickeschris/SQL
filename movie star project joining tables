@@ -1,0 +1,11 @@
+CREATE TABLE movie_stars(
+id INTEGER PRIMARY KEY,
+first_name TEXT,
+last_name TEXT, 
+birth_date TEXT);
+
+CREATE TABLE star_projects(
+id INTEGER PRIMARY KEY,
+project_id INTEGER,
+title TEXT,
+genre TEXT); 
