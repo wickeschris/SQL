@@ -16,7 +16,7 @@ INSERT INTO Naruto_Characters (Name, Age, Gender, Clan, Village) VALUES
 CREATE TABLE jutsus (
   jutsu_name TEXT PRIMARY KEY,
   description TEXT,
-  character_name TEXT REFERENCES           naruto_characters(Name)
+  character_name TEXT REFERENCES naruto_characters(Name)
 );
 
 INSERT INTO jutsus (jutsu_name, description, character_name) VALUES
@@ -27,7 +27,7 @@ INSERT INTO jutsus (jutsu_name, description, character_name) VALUES
 ('Sand Burial', 'A strong technique where mass amounts of sand engulfs an opp', 'Gaara');
 
 CREATE TABLE affiliations (
-  character_name TEXT REFERENCES           naruto_characters (Name),
+  character_name TEXT REFERENCES naruto_characters (Name),
   team TEXT
   );
 
@@ -41,7 +41,7 @@ INSERT INTO affiliations (character_name, team) VALUES
 ('Gaara', 'Kazekage'),
 ('Rock Lee', 'Team Guy');
 
---List of Characters and their Team
+#1. List of Characters and their Team
 
 SELECT name, team as 'affliations'
 FROM naruto_characters 
@@ -49,9 +49,9 @@ LEFT JOIN  affiliations
 ON naruto_characters. name = affiliations.character_name
 GROUP BY name;
 
---List of Characters and their respected Jutsus
+#2. List of Characters and their respected Jutsus
 
 SELECT name, jutsu_name as jutsus
 FROM naruto_characters
 LEFT JOIN jutsus 
-ON naruto_characters.name = jutsus.character_name;
+ON naruto_characters.name = jutsus.character_name:
