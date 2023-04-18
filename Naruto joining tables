@@ -1,0 +1,57 @@
+CREATE TABLE naruto_characters (
+  name TEXT PRIMARY KEY,
+  age INTEGER,
+  gender TEXT,
+  clan TEXT,
+  village TEXT);
+
+INSERT INTO Naruto_Characters (Name, Age, Gender, Clan, Village) VALUES
+('Naruto', 16, 'Male', 'Uzumaki', 'Konoha'),
+('Sasuke', 16, 'Male', 'Uchiha', 'Konoha'),
+('Sakura', 16, 'Female', 'Haruno', 'Konoha'),
+('Kakashi', 29, 'Male', 'Hatake', 'Konoha'),
+('Gaara', 16, 'Male', 'Sabaku', 'Sunagakure'),
+('Rock Lee', 17, 'Male', NULL, 'Konoha');
+
+CREATE TABLE jutsus (
+  jutsu_name TEXT PRIMARY KEY,
+  description TEXT,
+  character_name TEXT REFERENCES           naruto_characters(Name)
+);
+
+INSERT INTO jutsus (jutsu_name, description, character_name) VALUES
+('Rasengan', 'A powerful spinning ball of chakra formed in the hand', 'Naruto'),
+('Chidori', 'A high-powered, lightning-based jutsu', 'Sasuke'),
+('Copy Cat Prowess', 'A technique that allows the user copy another users jutsu', 'Kakashi'),
+('Shadow Clone', 'Creates multiple copies of the user', 'Naruto'),
+('Sand Burial', 'A strong technique where mass amounts of sand engulfs an opp', 'Gaara');
+
+CREATE TABLE affiliations (
+  character_name TEXT REFERENCES           naruto_characters (Name),
+  team TEXT
+  );
+
+INSERT INTO affiliations (character_name, team) VALUES
+('Naruto', 'Team 7'),
+('Sasuke', 'Team 7'),
+('Sasuke', 'Akatsuki'),
+('Sakura', 'Team 7'),
+('Kakashi', 'Team 7'),
+('Kakashi', 'Anbu Black Ops'),
+('Gaara', 'Kazekage'),
+('Rock Lee', 'Team Guy');
+
+--List of Characters and their Team
+
+SELECT name, team as 'affliations'
+FROM naruto_characters 
+LEFT JOIN  affiliations 
+ON naruto_characters. name = affiliations.character_name
+GROUP BY name;
+
+--List of Characters and their respected Jutsus
+
+SELECT name, jutsu_name as jutsus
+FROM naruto_characters
+LEFT JOIN jutsus 
+ON naruto_characters.name = jutsus.character_name;
