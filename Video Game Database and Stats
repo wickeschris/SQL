@@ -1,4 +1,4 @@
-CREATE TABLE video_games 
+CREATE TABLE video_games
 (id INTEGER PRIMARY KEY,
 name TEXT, 
 genre TEXT, 
