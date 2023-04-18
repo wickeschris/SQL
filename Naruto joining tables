@@ -41,7 +41,11 @@ INSERT INTO affiliations (character_name, team) VALUES
 ('Gaara', 'Kazekage'),
 ('Rock Lee', 'Team Guy');
 
-#1. List of Characters and their Team
+--List of Characters and their CLans
+  SELECT name, clan
+  FROM naruto_characters;
+
+--List of Characters and their Team
 
 SELECT name, team as 'affliations'
 FROM naruto_characters 
@@ -49,7 +53,7 @@ LEFT JOIN  affiliations
 ON naruto_characters. name = affiliations.character_name
 GROUP BY name;
 
-#2. List of Characters and their respected Jutsus
+--List of Characters and their respected Jutsus
 
 SELECT name, jutsu_name as jutsus
 FROM naruto_characters
