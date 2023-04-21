@@ -1,0 +1,54 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into.
+# Finally, I performed analytics on the data using SQL.
+
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+song_key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+song_mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness decimal(8,7) NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL );
+
+#Then I inserted the Spotify Data .csv into the table.
+
+#Next, I explored the data using the following SQL below.
+
+
+#I first grabbed all the data to view from the Spotify database.
+
+SELECT *
+FROM BIT_DB.spotifydata;
+
+#Next I determined who the number one artist is by popularity.
+
+SELECT artist_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity DESC
+LIMIT 1;
+
+#I then determined which track by Olivia Rodrigo was most popular among the database.
+
+SELECT track_name 
+FROM BIT_DB.Spotifydata
+WHERE artist_name = 'Olivia Rodrigo'
+ORDER BY popularity DESC
+LIMIT 1;
+
+#Last I determined the avg popularity, danceability, and energy by artist and track. 
+
+SELECT artist_name ,track_name ,avg(popularity) ,avg(danceability) ,avg(energy)
+FROM BIT_DB.spotifydata
+GROUP BY artist_name, track_name;
