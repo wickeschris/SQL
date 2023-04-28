@@ -1,0 +1,39 @@
+##SCENARIO: A detective needs your help with a case but you end up losing it somehow. 
+You vaguely remember that the crime scene was a murder that occured sometime on Jan 15, 2018
+and that it took place in SQL City.
+
+--Find out all murder reports in sql city
+
+SELECT *
+FROM crime_scene_report
+WHERE type = 'murder'
+AND city = 'SQL City';
+
+-- Find out the witness who lives on the last house of Northwestern Dr
+
+SELECT *
+FROM person
+WHERE address_street_name = 'Northwestern Dr'
+ORDER BY address_number DESC 
+LIMIT 1;
+
+--Find out second witness
+
+SELECT *
+FROM person
+WHERE address_street_name = 'Franklin Ave'
+AND name LIKE 'Annabel%';
+
+-- Now that we know person.id number we then figure out which transcript belongs to the witnesses
+   joining tables: person and interview
+
+SELECT p.name, i.transcript
+FROM person p
+JOIN interview i
+ON p.id = i.person_id
+WHERE p.id = 14887
+OR p.id = 16371;
+
+
+
+Source: https://mystery.knightlab.com/
