@@ -24,7 +24,7 @@ FROM person
 WHERE address_street_name = 'Franklin Ave'
 AND name LIKE 'Annabel%';
 
--- Now that we know person.id number we then figure out which transcript belongs to the witnesses
+--Now that we know person.id number we then figure out which transcript belongs to the witnesses
    joining tables: person and interview
 
 SELECT p.name, i.transcript
@@ -34,6 +34,61 @@ ON p.id = i.person_id
 WHERE p.id = 14887
 OR p.id = 16371;
 
+--Morty Schapiro (witness 1) in the interview states : "I heard a gunshot and then saw a man run out. 
+                                            He had a "Get Fit Now Gym" bag. The membership 
+                                            number on the bag started with "48Z". 
+                                            Only gold members have those bags.
+                                            The man got into a car with a plate that included "H42W".
+AND
+
+--Annabel Miller (witness 2)  states : "I saw the murder happen, and I recognized the killer from my gym when
+                           I was working out last week on January the 9th.
+
+
+
+--From the clues the witnesses give above, you get an incling on what to do next
+
+
+SELECT * 
+FROM get_fit_now_check_in ch
+JOIN get_fit_now_member mem
+ON ch.membership_id = mem.id
+WHERE membership_id LIKE "48Z%"
+AND check_in_date = 20180109;
+
+--The query above shows the memberid and check in dates of the people with similar values:
+   Joe Germuska and Jeremy Bowers are the results.
+
+--Finally I query (below) the plate number clue
+   
+
+SELECT *
+FROM person
+JOIN drivers_license
+ON person.license_id = drivers_license.id
+WHERE plate_number LIKE '%H42W%';
+
+-- Query Results are as of followed: 
+Tushar Chandra, Maxine Whitely AND last but not least Jeremy Bowers again.
+
+--I then run another query to see all who checked on the date January 9th, 2018 
+  to see if Tushar or Maxine would result in the query.
+   
+SELECT mem.name, ch.check_in_date
+FROM get_fit_now_check_in ch
+JOIN get_fit_now_member mem
+ON ch.membership_id = mem.id
+WHERE check_in_date = 20180109
+ORDER BY name ;
+
+ --As the query results, the two (Tushar or Maxine) did not show up in the list 
+   but however Jeremy Bowers does so we know that is his car with the license plate including "H42W".  
+ 
+ INSERT INTO solution VALUES (1, 'Jeremy Bowers');
+        
+ SELECT value FROM solution;
+   
+--Resulting to Jeremy Bowers being the killer.
 
 
 Source: https://mystery.knightlab.com/
